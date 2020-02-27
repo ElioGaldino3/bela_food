@@ -43,57 +43,62 @@ class CustomDialogs {
                 child: Column(
                   children: <Widget>[
                     Expanded(
-                      child: ListView.builder(
-                        padding: EdgeInsets.zero,
-                        itemCount: controller.flavors.length,
-                        itemBuilder: (context, indexFlavor) {
-                          double widthContextList =
-                              MediaQuery.of(context).size.width;
-                          return GestureDetector(
-                            child: Observer(
-                              builder: (_) {
-                                return Container(
-                                  padding: EdgeInsets.only(bottom: 4),
-                                  width: widthContextList,
-                                  height: 50,
-                                  color: controller
-                                              .orderPizzas[index].flavorPizzas
-                                              .indexWhere((flavorPizza) =>
-                                                  flavorPizza.flavor.id ==
-                                                  controller
-                                                      .flavors[indexFlavor]
-                                                      .id) !=
-                                          -1
-                                      ? Theme.of(context).primaryColor
-                                      : Theme.of(context).backgroundColor,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Text(
-                                          controller.flavors[indexFlavor].name,
-                                          style: TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        Text(
-                                          controller.flavors[indexFlavor].ingredients,
-                                          style: TextStyle(fontSize: 10),
-                                          overflow: TextOverflow.fade,
-                                        )
-                                      ],
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(13),
+                        child: ListView.builder(
+                          padding: EdgeInsets.zero,
+                          itemCount: controller.flavors.length,
+                          itemBuilder: (context, indexFlavor) {
+                            double widthContextList =
+                                MediaQuery.of(context).size.width;
+                            return GestureDetector(
+                              child: Observer(
+                                builder: (_) {
+                                  return Container(
+                                    padding: EdgeInsets.only(bottom: 4),
+                                    width: widthContextList,
+                                    height: 50,
+                                    color: controller
+                                                .orderPizzas[index].flavorPizzas
+                                                .indexWhere((flavorPizza) =>
+                                                    flavorPizza.flavor.id ==
+                                                    controller
+                                                        .flavors[indexFlavor]
+                                                        .id) !=
+                                            -1
+                                        ? Theme.of(context).primaryColor
+                                        : Theme.of(context).backgroundColor,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Text(
+                                            controller
+                                                .flavors[indexFlavor].name,
+                                            style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            controller.flavors[indexFlavor]
+                                                .ingredients,
+                                            style: TextStyle(fontSize: 10),
+                                            overflow: TextOverflow.fade,
+                                          )
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                );
+                                  );
+                                },
+                              ),
+                              onTap: () {
+                                controller.addFlavor(index, indexFlavor);
                               },
-                            ),
-                            onTap: () {
-                              controller.addFlavor(index, indexFlavor);
-                            },
-                          );
-                        },
+                            );
+                          },
+                        ),
                       ),
                     ),
                   ],
